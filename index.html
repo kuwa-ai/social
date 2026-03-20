@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>中学社会4択クイズ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <header class="app-header">
+      <h1 class="app-title">中学1〜2年 社会クイズ</h1>
+      <p class="app-subtitle">地理・歴史・公民の基礎を4択でチェック（25問or50問）</p>
+    </header>
+
+    <main class="quiz-card">
+      <!-- 分野選択 -->
+      <section id="screen-select" class="screen is-active">
+        <h2 class="screen-title">試験を開始</h2>
+
+        <div id="data-status" class="data-status" aria-live="polite">データを読み込み中…</div>
+
+        <div id="data-fallback" class="data-fallback is-hidden">
+          <div class="data-fallback-title">ローカルJSONを選択してください</div>
+          <input
+            id="data-file-input"
+            type="file"
+            accept="application/json,.json"
+          />
+          <div class="data-fallback-sub">
+            （ブラウザ設定によっては `file://` のままだと読み込めないための代替です）
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label for="subject-select" class="label">分野</label>
+          <select id="subject-select" class="select">
+            <option value="geography" selected>地理</option>
+            <option value="history">歴史</option>
+            <option value="civics">公民</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <label for="question-count-select" class="label">出題数</label>
+          <select id="question-count-select" class="select">
+            <option value="25">25問</option>
+            <option value="50" selected>50問</option>
+          </select>
+        </div>
+
+        <div class="exam-meta">
+          <div id="exam-meta-question-count" class="exam-meta-item">
+            出題：50問（各2点）
+          </div>
+          <div id="exam-meta-total-points" class="exam-meta-item">合計：100点</div>
+        </div>
+
+        <button id="start-button" class="next-button">開始</button>
+
+        <div class="history-panel" aria-live="polite">
+          <div class="history-title">実施履歴（直近5件）</div>
+          <div id="history-list" class="history-list">
+            履歴を読み込み中…
+          </div>
+        </div>
+      </section>
+
+      <!-- クイズ画面 -->
+      <section id="screen-quiz" class="screen">
+        <div class="question-meta">
+          <span id="progress-text">1/50</span>
+          <span id="question-number" class="question-subtitle">第1問</span>
+        </div>
+
+        <div id="question-text" class="question-text">
+          <!-- JavaScript から設定 -->
+        </div>
+
+        <div id="choices" class="choices">
+          <!-- JavaScript から4択を生成 -->
+        </div>
+
+        <div class="feedback" id="feedback"></div>
+
+        <button id="next-button" class="next-button" disabled>次へ</button>
+      </section>
+
+      <!-- 結果画面 -->
+      <section id="screen-result" class="screen">
+        <h2 class="screen-title">結果</h2>
+
+        <div id="result-stats" class="result-stats"></div>
+
+        <div class="result-section-title">間違えた問題の解説</div>
+        <div id="wrong-questions" class="wrong-questions">
+          <!-- JavaScript から設定 -->
+        </div>
+
+        <button id="restart-button" class="next-button">もう一度</button>
+      </section>
+    </main>
+  </div>
+
+  <!-- 分野ごとの問題データ -->
+  <!-- 試験ロジック（JSONを読み込んで出題） -->
+  <script src="script.js"></script>
+</body>
+</html>
+
