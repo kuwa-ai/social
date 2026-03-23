@@ -2,15 +2,15 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>中学社会4択クイズ</title>
+  <title>中学理科4択クイズ</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="app">
     <header class="app-header">
-      <h1 class="app-title">中学1〜2年 社会クイズ</h1>
-      <p class="app-subtitle">地理・歴史・公民の基礎を4択でチェック（25問or50問）</p>
+      <h1 class="app-title">中学1〜2年 理科クイズ</h1>
+      <p class="app-subtitle">物理・化学・生物・地学の基礎を4択でチェック（25問/50問）</p>
     </header>
 
     <main class="quiz-card">
@@ -22,11 +22,39 @@
 
         <div id="data-fallback" class="data-fallback is-hidden">
           <div class="data-fallback-title">ローカルJSONを選択してください</div>
-          <input
-            id="data-file-input"
-            type="file"
-            accept="application/json,.json"
-          />
+
+          <div class="form-row">
+            <label for="data-files-input" class="label">4つまとめて選択（推奨）</label>
+            <input
+              id="data-files-input"
+              type="file"
+              multiple
+              accept="application/json,.json"
+            />
+          </div>
+
+          <div class="data-fallback-sub">
+            `physics_questions_150.json` / `chemistry_questions_150.json` / `biology_questions_150.json` / `earth_science_questions_150.json`
+            をまとめて選ぶと一括で読み込めます。
+          </div>
+
+          <div class="form-row">
+            <label for="physics-file-input" class="label">物理JSON</label>
+            <input id="physics-file-input" type="file" accept="application/json,.json" />
+          </div>
+          <div class="form-row">
+            <label for="chemistry-file-input" class="label">化学JSON</label>
+            <input id="chemistry-file-input" type="file" accept="application/json,.json" />
+          </div>
+          <div class="form-row">
+            <label for="biology-file-input" class="label">生物JSON</label>
+            <input id="biology-file-input" type="file" accept="application/json,.json" />
+          </div>
+          <div class="form-row">
+            <label for="earth-file-input" class="label">地学JSON</label>
+            <input id="earth-file-input" type="file" accept="application/json,.json" />
+          </div>
+
           <div class="data-fallback-sub">
             （ブラウザ設定によっては `file://` のままだと読み込めないための代替です）
           </div>
@@ -35,9 +63,10 @@
         <div class="form-row">
           <label for="subject-select" class="label">分野</label>
           <select id="subject-select" class="select">
-            <option value="geography" selected>地理</option>
-            <option value="history">歴史</option>
-            <option value="civics">公民</option>
+            <option value="physics" selected>物理</option>
+            <option value="chemistry">化学</option>
+            <option value="biology">生物</option>
+            <option value="earth">地学</option>
           </select>
         </div>
 
@@ -50,9 +79,7 @@
         </div>
 
         <div class="exam-meta">
-          <div id="exam-meta-question-count" class="exam-meta-item">
-            出題：50問（各2点）
-          </div>
+          <div id="exam-meta-question-count" class="exam-meta-item">出題：50問（各2点）</div>
           <div id="exam-meta-total-points" class="exam-meta-item">合計：100点</div>
         </div>
 
@@ -60,10 +87,13 @@
 
         <div class="history-panel" aria-live="polite">
           <div class="history-title">実施履歴（直近5件）</div>
-          <div id="history-list" class="history-list">
-            履歴を読み込み中…
-          </div>
+          <div id="history-list" class="history-list">履歴を読み込み中…</div>
         </div>
+
+        <p class="admin-link-row">
+          <a href="admin.html" class="admin-link">データ管理画面</a>
+          <span class="admin-link-note">（実施日時・所要時間・問ごとの回答時間を一覧・エクスポート）</span>
+        </p>
       </section>
 
       <!-- クイズ画面 -->
@@ -73,13 +103,11 @@
           <span id="question-number" class="question-subtitle">第1問</span>
         </div>
 
-        <div id="question-text" class="question-text">
-          <!-- JavaScript から設定 -->
-        </div>
+        <div id="question-text" class="question-text"></div>
 
-        <div id="choices" class="choices">
-          <!-- JavaScript から4択を生成 -->
-        </div>
+        <div id="choices" class="choices"></div>
+
+        <div id="elapsed-time" class="elapsed-time" aria-live="polite">経過：0:00</div>
 
         <div class="feedback" id="feedback"></div>
 
@@ -90,20 +118,19 @@
       <section id="screen-result" class="screen">
         <h2 class="screen-title">結果</h2>
 
+        <div id="exam-time-summary" class="exam-time-summary" aria-live="polite"></div>
+
         <div id="result-stats" class="result-stats"></div>
 
         <div class="result-section-title">間違えた問題の解説</div>
-        <div id="wrong-questions" class="wrong-questions">
-          <!-- JavaScript から設定 -->
-        </div>
+        <div id="wrong-questions" class="wrong-questions"></div>
 
         <button id="restart-button" class="next-button">もう一度</button>
       </section>
     </main>
   </div>
 
-  <!-- 分野ごとの問題データ -->
-  <!-- 試験ロジック（JSONを読み込んで出題） -->
+  <!-- 試験ロジック -->
   <script src="script.js"></script>
 </body>
 </html>

@@ -48,6 +48,58 @@ body {
     0 0 0 1px rgba(15, 23, 42, 0.3);
 }
 
+.screen {
+  display: none;
+}
+
+.screen.is-active {
+  display: block;
+}
+
+.screen-title {
+  margin: 0 0 14px;
+  font-size: 1.25rem;
+  color: #0f172a;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.label {
+  font-size: 0.9rem;
+  color: #374151;
+  font-weight: 600;
+}
+
+.select {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  font-size: 1rem;
+}
+
+.exam-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+  color: #374151;
+}
+
+.exam-meta-item {
+  font-size: 0.92rem;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: #f3f4f6;
+  box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.06) inset;
+}
+
 .question-meta {
   font-size: 0.85rem;
   color: #6b7280;
@@ -75,7 +127,31 @@ body {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
+}
+
+.elapsed-time {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #374151;
+  text-align: center;
+  margin-bottom: 12px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: #f3f4f6;
+  box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.06) inset;
+}
+
+.exam-time-summary {
+  margin: 0 0 14px;
+  padding: 12px;
+  border-radius: 12px;
+  background: #f3f4f6;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #374151;
+  line-height: 1.6;
+  box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.06) inset;
 }
 
 .choice {
@@ -169,10 +245,7 @@ body {
   box-shadow:
     0 12px 26px rgba(37, 99, 235, 0.55),
     0 0 0 1px rgba(15, 23, 42, 0.32);
-  transition:
-    transform 0.06s ease,
-    box-shadow 0.1s ease,
-    opacity 0.15s ease;
+  transition: transform 0.06s ease, box-shadow 0.1s ease, opacity 0.15s ease;
 }
 
 .next-button:hover:not(:disabled) {
@@ -192,72 +265,8 @@ body {
 .next-button:disabled {
   opacity: 0.5;
   cursor: default;
-  box-shadow:
-    0 0 0 1px rgba(148, 163, 184, 0.6);
+  box-shadow: 0 0 0 1px rgba(148, 163, 184, 0.6);
   background: linear-gradient(135deg, #4b5563, #6b7280);
-}
-
-@media (max-width: 480px) {
-  .quiz-card {
-    padding: 18px 14px 16px;
-  }
-
-  .app-title {
-    font-size: 1.4rem;
-  }
-}
-
-/* --- 追加：画面切り替え・模試風UI --- */
-.screen {
-  display: none;
-}
-
-.screen.is-active {
-  display: block;
-}
-
-.screen-title {
-  margin: 0 0 14px;
-  font-size: 1.25rem;
-  color: #0f172a;
-}
-
-.form-row {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  margin-bottom: 12px;
-}
-
-.label {
-  font-size: 0.9rem;
-  color: #374151;
-  font-weight: 600;
-}
-
-.select {
-  width: 100%;
-  padding: 10px 12px;
-  border-radius: 10px;
-  border: 1px solid #e5e7eb;
-  background: #ffffff;
-  font-size: 1rem;
-}
-
-.exam-meta {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  margin-bottom: 14px;
-  color: #374151;
-}
-
-.exam-meta-item {
-  font-size: 0.92rem;
-  padding: 8px 10px;
-  border-radius: 10px;
-  background: #f3f4f6;
-  box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.06) inset;
 }
 
 .result-stats {
@@ -294,46 +303,52 @@ body {
   color: #0f172a;
 }
 
-.data-status {
-  margin: 0 0 12px;
-  font-size: 0.9rem;
-  color: #6b7280;
-  font-weight: 600;
-}
-
-.data-fallback {
-  margin: 0 0 12px;
-  padding: 12px;
-  border-radius: 12px;
-  background: #f3f4f6;
-  box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.06) inset;
-}
-
-.data-fallback-title {
-  font-weight: 800;
-  color: #0f172a;
-  margin-bottom: 8px;
-}
-
-.data-fallback-sub {
-  margin-top: 6px;
-  font-size: 0.85rem;
-  color: #6b7280;
-  font-weight: 600;
-  line-height: 1.6;
-}
-
-.is-hidden {
-  display: none;
-}
-
 .wrong-questions {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-/* --- 実施履歴 --- */
+.wrong-item {
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.08) inset;
+  padding: 12px;
+}
+
+.wrong-q-head {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.wrong-q-title {
+  font-weight: 800;
+  color: #0f172a;
+  font-size: 0.95rem;
+}
+
+.wrong-meta {
+  font-size: 0.85rem;
+  color: #6b7280;
+  font-weight: 600;
+}
+
+.wrong-choice {
+  font-size: 0.9rem;
+  margin: 0;
+  line-height: 1.6;
+  color: #111827;
+}
+
+.explanation {
+  color: #374151;
+  font-size: 0.92rem;
+  line-height: 1.7;
+}
+
+/* 実施履歴 */
 .history-panel {
   margin-top: 14px;
   padding: 12px;
@@ -376,52 +391,73 @@ body {
   line-height: 1.4;
 }
 
-.wrong-item {
-  border-radius: 12px;
-  background: #ffffff;
-  box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.08) inset;
-  padding: 12px;
-}
-
-.wrong-q-head {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  margin-bottom: 8px;
-}
-
-.wrong-q-title {
-  font-weight: 800;
-  color: #0f172a;
-  font-size: 0.95rem;
-}
-
-.wrong-meta {
+.admin-link-row {
+  margin-top: 18px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(15, 23, 42, 0.08);
   font-size: 0.85rem;
+  text-align: center;
+}
+
+.admin-link {
+  color: #2563eb;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.admin-link:hover {
+  text-decoration: underline;
+}
+
+.admin-link-note {
+  display: block;
+  margin-top: 6px;
+  color: #64748b;
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+/* データ読み込みステータス/フォールバック（社会アプリと同系統） */
+.data-status {
+  margin: 0 0 12px;
+  font-size: 0.9rem;
   color: #6b7280;
   font-weight: 600;
 }
 
-.wrong-choice {
-  font-size: 0.9rem;
-  margin: 0;
-  line-height: 1.6;
-  color: #111827;
+.data-fallback {
+  margin: 0 0 12px;
+  padding: 12px;
+  border-radius: 12px;
+  background: #f3f4f6;
+  box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.06) inset;
 }
 
-details.wrong-details > summary {
-  cursor: pointer;
+.data-fallback-title {
   font-weight: 800;
   color: #0f172a;
+  margin-bottom: 10px;
 }
 
-details.wrong-details[open] > summary {
-  margin-bottom: 8px;
+.data-fallback-sub {
+  margin-top: 6px;
+  font-size: 0.85rem;
+  color: #6b7280;
+  font-weight: 600;
+  line-height: 1.6;
 }
 
-.explanation {
-  color: #374151;
-  font-size: 0.92rem;
-  line-height: 1.7;
+.is-hidden {
+  display: none;
+}
+
+@media (max-width: 480px) {
+  .quiz-card {
+    padding: 18px 14px 16px;
+  }
+  .app-title {
+    font-size: 1.4rem;
+  }
 }
 

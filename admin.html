@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>データ管理 — 中学理科クイズ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <div class="admin-wrap">
+    <header class="admin-header">
+      <div>
+        <h1>実施データ管理（理科）</h1>
+        <p>
+          このブラウザの IndexedDB（<code class="mono">scienceQuizDB</code>）に保存された試験記録を表示します。
+          クイズの<strong>採点結果表示時</strong>に自動で記録されます。
+        </p>
+      </div>
+      <nav class="admin-nav">
+        <a href="index.html">← クイズに戻る</a>
+      </nav>
+    </header>
+
+    <div id="admin-message" class="admin-message is-hidden" role="status"></div>
+
+    <div class="admin-toolbar">
+      <label for="filter-subject">分野</label>
+      <select id="filter-subject" aria-label="分野で絞り込み">
+        <option value="">すべて</option>
+        <option value="physics">物理</option>
+        <option value="chemistry">化学</option>
+        <option value="biology">生物</option>
+        <option value="earth">地学</option>
+      </select>
+      <button type="button" class="admin-btn" id="btn-reload">再読み込み</button>
+      <button type="button" class="admin-btn" id="btn-export-json">JSON エクスポート</button>
+      <button type="button" class="admin-btn" id="btn-export-csv-summary">CSV（一覧）</button>
+      <button type="button" class="admin-btn" id="btn-export-csv-detail">CSV（問ごと）</button>
+      <button type="button" class="admin-btn" id="btn-export-csv-wrong">CSV（不正解）</button>
+      <button type="button" class="admin-btn danger" id="btn-clear-all">全削除</button>
+    </div>
+
+    <section class="admin-stats" id="admin-stats" aria-live="polite"></section>
+
+    <div class="table-scroll">
+      <table class="admin-table" id="attempts-table">
+        <thead>
+          <tr>
+            <th>記録日時</th>
+            <th>分野</th>
+            <th>結果</th>
+            <th>不正解</th>
+            <th>試験時間</th>
+            <th>平均回答</th>
+            <th>詳細</th>
+          </tr>
+        </thead>
+        <tbody id="attempts-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <script src="admin.js"></script>
+</body>
+</html>
